@@ -1,20 +1,22 @@
-#Copy all of this code to jupyter notebook
+#Copy all of this code (per segment) to jupyter notebook
 
 from keras.models import Sequential
 from keras.layers import Dense
 import numpy as np
 from random import randint
+import matplotlib.pyplot as plt
 
 #Variables
 jmlh = 10000
 panjang = 28
-train_iteration = 20
+train_iteration = 200
 EPOCH = 3
 BASIZE = 16
 
+#functions to convert input
 def string_biner(num):
     hasil = str(bin(num)[2:])
-    hasil = hasil.rjust(panjang, '0')
+    hasil = hasil.rjust(panjang, '0') #string padding
     return hasil
 
 def list_int_string_biner(string):
@@ -29,6 +31,7 @@ def stringto_int_biner(lmit):
 def int_biner(string):
     return int(string, 2)
 
+#function to show prediction result
 def MyPrediction(ang):
     angmud = list_int_string_biner(string_biner(ang))
     temp = np.array([angmud])
@@ -46,14 +49,13 @@ md = Sequential()
 
 md.add(Dense(panjang, input_dim = panjang, activation = 'relu'))
 md.add(Dense(panjang*4, activation = 'relu'))
+md.add(Dense(panjang*8, activation = 'relu'))
 md.add(Dense(panjang*4, activation = 'relu'))
 md.add(Dense(panjang, activation = 'sigmoid'))
 md.compile(optimizer='adam',
            loss = 'binary_crossentropy',
            metrics=['accuracy'])
 md.summary()
-print(md.input_shape, md.output_shape)
-print(angka.shape, hasil.shape)
 
 #train
 for i in range(train_iteration):
@@ -72,3 +74,20 @@ for i in range(train_iteration):
         else:
             print(" -> WA")
         u += 1
+
+#show training result
+vis_angka = [int_biner(stringto_int_biner(i)) for i in angka]
+vis_hasil = [int_biner(stringto_int_biner(j)) for j in hasil]
+
+plt.subplot(1,2,1)
+plt.title("Hasil asli")
+plt.plot(vis_hasil)
+
+ai_hasil = []
+for k in md.predict(angka):
+    ai_hasil.append(int_biner(stringto_int_biner(k)))
+
+plt.subplot(1,2,2)
+plt.title("Hasil AI")
+plt.plot(ai_hasil, 'g')
+plt.show()

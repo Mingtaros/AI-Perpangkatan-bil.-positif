@@ -3,7 +3,7 @@
 Creator : Leonardo... yes...
 AI ngasal agak ngaco untuk latihan bikin AI
 
-<table border = 1>
+<table>
 <tr>
     <td colspan = 2>Library Used :</td>
 </tr><tr>
@@ -11,7 +11,9 @@ AI ngasal agak ngaco untuk latihan bikin AI
 </tr><tr>
     <td>random</td><td>randint</td>
 </tr><tr>
-    <td>keras</td><td>layer.Dense, models.Sequential</td>
+    <td>keras.layers</td><td>Dense</td>
+</tr><tr>
+    <td>keras.models</td><td>Sequential, model_from_json</td>
 </tr><tr>
     <td>matplotplib</td><td>pyplot</td>
 </tr>

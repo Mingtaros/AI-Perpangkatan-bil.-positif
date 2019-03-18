@@ -1,6 +1,6 @@
 #Copy all of this code (per segment) to jupyter notebook
 
-from keras.models import Sequential
+from keras.models import Sequential, model_from_json
 from keras.layers import Dense
 import numpy as np
 from random import randint
@@ -67,7 +67,7 @@ for i in range(train_iteration):
     u = 0
     for j in md.predict(sementara):
         print(int_biner(stringto_int_biner(sementara[u])), '-> Real Result ->',
-        (int_biner(stringto_int_biner(sementara[u])))**2, 
+              (int_biner(stringto_int_biner(sementara[u])))**2, 
               '-> AI Result ->', int_biner(stringto_int_biner(j)), end = '')
         if (int_biner(stringto_int_biner(sementara[u]))**2 == int_biner(stringto_int_biner(j))):
             print(" -> AC")
@@ -91,3 +91,23 @@ plt.subplot(1,2,2)
 plt.title("Hasil AI")
 plt.plot(ai_hasil, 'g')
 plt.show()
+
+
+# saving AI to .json
+md_json = md.to_json()
+with open("MyAIgen1.json", "w") as json_file:
+    json_file.write(md_json)
+# saving AI weights to .h5
+md.save_weights("MyAIgen1.h5")
+print("Saved model to disk")
+
+#load json model
+json_file = open("MyAIgen1.json", 'r')
+md_load_from_json = json_file.read()
+json_file.close()
+md = model_from_json(md_load_from_json)
+# load weights into the loaded model
+md.load_weights("MyAIgen1.h5")
+print("Loaded model from disk")
+
+md.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])

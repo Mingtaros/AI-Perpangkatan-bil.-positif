@@ -64,6 +64,11 @@ for i in range(train_iteration):
     sementara = np.array(sementara)
     u = 0
     for j in md.predict(sementara):
-        print(int_biner(stringto_int_biner(sementara[u])), '-> Real Result ->', (int_biner(stringto_int_biner(sementara[u])))**2, 
-              '-> AI Result ->', int_biner(stringto_int_biner(j)))
+        print(int_biner(stringto_int_biner(sementara[u])), '-> Real Result ->',
+        (int_biner(stringto_int_biner(sementara[u])))**2, 
+              '-> AI Result ->', int_biner(stringto_int_biner(j)), end = '')
+        if (int_biner(stringto_int_biner(sementara[u]))**2 == int_biner(stringto_int_biner(j))):
+            print(" -> AC")
+        else:
+            print(" -> WA")
         u += 1

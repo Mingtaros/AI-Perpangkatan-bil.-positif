@@ -1,7 +1,9 @@
 <h1> AI Perpangkatan kuadrat dengan Keras model </h1>
 
-Creator : Leonardo... yes...
-AI ngasal agak ngaco untuk latihan bikin AI
+Creator : Leonardo... yes...<br>
+AI ngasal dan gak penting dan agak ngaco untuk latihan bikin AI dan Keras
+
+Language = Python 3.6.7; Jupyter Notebook
 
 <table>
 <tr>
